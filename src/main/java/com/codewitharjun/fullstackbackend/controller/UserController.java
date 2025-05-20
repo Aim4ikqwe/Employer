@@ -12,6 +12,7 @@ import java.util.List;
 @CrossOrigin("http://localhost:3000")
 public class UserController {
 
+
     @Autowired
     private UserRepository userRepository;
 
@@ -22,6 +23,7 @@ public class UserController {
 
     @GetMapping("/users")
     List<User> getAllUsers() {
+        System.out.println("Запрос на users");
         return userRepository.findAll();
     }
 

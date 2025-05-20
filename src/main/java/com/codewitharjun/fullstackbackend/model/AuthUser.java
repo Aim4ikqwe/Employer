@@ -6,16 +6,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Identification {
+public class AuthUser {
     @Id
     @GeneratedValue
     private long id;
-@Column(unique = true)
+
+    public AuthUser() {
+    }
+
+    public AuthUser(long id) {
+        this.id = id;
+    }
+
+    @Column(unique = true)
     private String login;
     private String password;
     private String roles;
 
-    public Identification(long id, String login, String password, String roles) {
+    public AuthUser(long id, String login, String password, String roles) {
         this.id = id;
         this.login = login;
         this.password = password;
