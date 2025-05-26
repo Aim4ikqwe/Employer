@@ -1,4 +1,4 @@
-package com.codewitharjun.fullstackbackend.config;
+package com.example.fullstackbackend.config;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

@@ -1,8 +1,8 @@
-package com.codewitharjun.fullstackbackend.controller;
+package com.example.fullstackbackend.controller;
 
-import com.codewitharjun.fullstackbackend.config.JwtUtil;
-import com.codewitharjun.fullstackbackend.model.AuthUser;
-import com.codewitharjun.fullstackbackend.repository.IdentificationRepository;
+import com.example.fullstackbackend.config.JwtUtil;
+import com.example.fullstackbackend.model.AuthUser;
+import com.example.fullstackbackend.repository.IdentificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

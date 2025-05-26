@@ -1,4 +1,4 @@
-package com.codewitharjun.fullstackbackend.config;
+package com.example.fullstackbackend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

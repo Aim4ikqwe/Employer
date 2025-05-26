@@ -1,4 +1,4 @@
-package com.codewitharjun.fullstackbackend.config;
+package com.example.fullstackbackend.config;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,13 +23,17 @@ public class JwtFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response,
                             FilterChain chain) throws IOException, ServletException {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
         String path = request.getRequestURI();
-        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) { // без этого не пускает
-            chain.doFilter(request, response);
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) { // Для preflight просто пропускаем
+            response.setStatus(HttpServletResponse.SC_OK);
             return;
         }
 
-        // Публичные пути
         if (path.equals("/login") || path.equals("/register")) {
             chain.doFilter(request, response);
             return;
@@ -51,9 +55,9 @@ public class JwtFilter extends HttpFilter {
             return;
         }
 
-        // Можно положить username в атрибут запроса, если нужно
         request.setAttribute("username", username);
 
         chain.doFilter(request, response);
     }
+
 }

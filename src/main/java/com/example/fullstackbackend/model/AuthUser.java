@@ -1,4 +1,4 @@
-package com.codewitharjun.fullstackbackend.model;
+package com.example.fullstackbackend.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

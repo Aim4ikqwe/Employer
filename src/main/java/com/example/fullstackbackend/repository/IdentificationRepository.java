@@ -1,6 +1,6 @@
-package com.codewitharjun.fullstackbackend.repository;
+package com.example.fullstackbackend.repository;
 
-import com.codewitharjun.fullstackbackend.model.AuthUser;
+import com.example.fullstackbackend.model.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,15 +1,14 @@
-package com.codewitharjun.fullstackbackend.controller;
+package com.example.fullstackbackend.controller;
 
-import com.codewitharjun.fullstackbackend.exception.UserNotFoundException;
-import com.codewitharjun.fullstackbackend.model.User;
-import com.codewitharjun.fullstackbackend.repository.UserRepository;
+import com.example.fullstackbackend.exception.UserNotFoundException;
+import com.example.fullstackbackend.model.User;
+import com.example.fullstackbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class UserController {
 
 
@@ -23,12 +22,12 @@ public class UserController {
 
     @GetMapping("/users")
     List<User> getAllUsers() {
-        System.out.println("Запрос на users");
         return userRepository.findAll();
     }
 
     @GetMapping("/user/{id}")
     User getUserById(@PathVariable Long id) {
+        System.out.println("запрос на user");
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
@@ -46,6 +45,7 @@ public class UserController {
 
     @DeleteMapping("/user/{id}")
     String deleteUser(@PathVariable Long id){
+        System.out.println("Удален");
         if(!userRepository.existsById(id)){
             throw new UserNotFoundException(id);
         }
