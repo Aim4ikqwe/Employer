@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class AuthController {
     @Autowired
      IdentificationRepository identificationRepository;
@@ -21,46 +21,27 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // Пример авторизации: жестко проверяем пользователя (в реале - из БД)
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-        System.out.println("Логин: " + request.getLogin());
-        System.out.println("Пароль: " + request.getPassword());
 
         AuthUser user = identificationRepository.findByLogin(request.getLogin());
-        System.out.println("Найден пользователь: " + user);
 
         if (user != null) {
             if (request.getPassword().equals(user.getPassword())) {
                 String token = jwtUtil.generateToken(user.getLogin());
-                System.out.println("Генерация токена успешна");
+                System.out.println("Авторизован");
                 return ResponseEntity.ok(new AuthResponse(token));
             } else {
+                System.out.println("Неправильный пароль");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
             }
         } else {
+            System.out.println("Пользователь не найден");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
         }
     }
-
-    // Защищённый эндпоинт
-    @GetMapping("/protected")
-    public ResponseEntity<?> protectedEndpoint(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token not found");
-        }
-
-        String token = authHeader.substring(7);
-        String username = jwtUtil.validateTokenAndGetUsername(token);
-        if (username == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
-        }
-
-        return ResponseEntity.ok("Hi, " + username + "! It is safety endpoint.");
-    }
 }
 
-// DTO для запроса логина
 
 class AuthRequest {
     private String login;

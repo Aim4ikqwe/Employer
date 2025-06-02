@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-/* Created by Arjun Gautam */
 @Entity
 public class User {
 

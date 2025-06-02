@@ -14,7 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // для всех путей
-                        .allowedOrigins("http://localhost:3000") // разрешаем фронт с этого адреса
+                        .allowedOrigins("http://172.20.10.2:3000") // разрешаем фронт с этого адреса
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // методы
                         .allowCredentials(true); // если нужны куки или авторизация
             }
