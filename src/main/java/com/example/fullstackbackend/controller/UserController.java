@@ -10,22 +10,25 @@ import java.util.List;
 
 @RestController
 public class UserController {
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping("/user")
-    User newUser(@RequestBody User newUser) {
+    public User newUser(@RequestBody User newUser) {
         return userRepository.save(newUser);
     }
 
     @GetMapping("/users")
-    List<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/user/{id}")
-    User getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         System.out.println("запрос на user");
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
@@ -43,7 +46,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    String deleteUser(@PathVariable Long id){
+    public String deleteUser(@PathVariable Long id){
         System.out.println("Удален");
         if(!userRepository.existsById(id)){
             throw new UserNotFoundException(id);
